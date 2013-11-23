@@ -70,8 +70,6 @@ while {true} do
 				if (_index >= _last_index) then {
 					_exit = true;
 				} else {
-					diag_log format ["DEBUG BTC: _cargo_array: %1", _cargo_array];
-					diag_log format ["DEBUG BTC: _index: %1", _index];
 					_cantsee = lineIntersects [getposASL(_chopper), getposASL((_cargo_array select _index)), _chopper, (_cargo_array select _index)];
 					if (!_cantsee) then {
 						_cargo = _cargo_array select _index;
