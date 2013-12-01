@@ -153,13 +153,15 @@ while {true} do
 		};
 		if (!isNull _cargo && BTC_lifted == 0 && _can_lift) then {
 			if (((abs _cargo_z) < BTC_lift_max_h) && ((abs _cargo_z) > BTC_lift_min_h) && ((abs _cargo_x) < BTC_lift_radius) && ((abs _cargo_y) < BTC_lift_radius)) then {
-				_chopper  setVariable ["BTC Lift Object", _cargo, true];
-				_name_cargo  = getText (configFile >> "cfgVehicles" >> typeof _cargo >> "displayName");
-				_text_action = ("<t color=""#ED2744"">" + "Lift " + (_name_cargo) + "</t>");
 				if (BTC_lifted == 1) then {
 					_chopper removeAction BTC_liftActionId;
+					if ((count (crew _cargo)) != 0) then {
+						execVM "=BTC=_Logistic\=BTC=_Lift\=BTC=_detachCargo.sqf";
+					};
 				};
 				if (BTC_lifted == 0 && BTC_lift == 1  && !(_cargo getVariable ["BTC_Cannot_Lift", false])) then	{
+					_name_cargo  = getText (configFile >> "cfgVehicles" >> typeof _cargo >> "displayName");
+					_text_action = ("<t color=""#ED2744"">" + "Lift " + (_name_cargo) + "</t>");
 					BTC_liftActionId = _chopper addAction [_text_action, "=BTC=_Logistic\=BTC=_Lift\=BTC=_attachCargo.sqf", [_cargo, _name_cargo], 7, true, true];
 					BTC_lift = 0;
 				};

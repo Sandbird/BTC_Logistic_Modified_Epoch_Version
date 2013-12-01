@@ -27,6 +27,7 @@ if ((count (crew _cargo)) == 0) then {
 	_height       = (_rel_pos select 2) + 2.5;
 
 	_cargo attachTo [_chopper, [0, 0, _height]];
+	_chopper  setVariable ["BTC Lift Object", _cargo, true];
 	vehicle player vehicleChat format ["%1 lifted", _name_cargo];
 	_text_action = ("<t color=""#ED2744"">" + "Drop " + (_name_cargo) + "</t>");
 	BTC_SganciaActionId = _chopper addAction [_text_action,"=BTC=_Logistic\=BTC=_Lift\=BTC=_detachCargo.sqf", "", 7, false, false]; 
