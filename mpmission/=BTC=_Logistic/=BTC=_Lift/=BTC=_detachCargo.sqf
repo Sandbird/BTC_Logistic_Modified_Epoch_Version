@@ -12,6 +12,8 @@ Date: 05/02/2012
 Visit us at: http://www.blacktemplars.altervista.org/
 You are not allowed to modify this file and redistribute it without permission given by me (Giallustio).
 */
+
+private ["_vel","_name_cargo","_chopper","_cargo","_cantsee"];
 _chopper   = vehicle player;
 _cargo = _chopper getVariable "BTC Lift Object";
 
@@ -27,5 +29,5 @@ if (!_cantsee) then {
 
 	_name_cargo  = getText (configFile >> "cfgVehicles" >> typeof _cargo >> "displayName");
 	vehicle player vehicleChat format ["%1 dropped", _name_cargo];
-	_obj_fall = [_chopper, _cargo, "ParachuteWest"] spawn BTC_paradrop;
+	[_chopper, _cargo, "ParachuteWest"] spawn BTC_paradrop;
 };

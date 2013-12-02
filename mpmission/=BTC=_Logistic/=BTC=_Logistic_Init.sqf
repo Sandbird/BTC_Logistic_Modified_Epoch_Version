@@ -13,6 +13,7 @@ You are not allowed to modify this file and redistribute it without permission g
 */
 
 //Lift
+
 BTC_lift_pilot   = [];
 BTC_lift         = 1;
 BTC_lifted       = 0;
@@ -23,13 +24,14 @@ BTC_Liftable     = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC","Air"
 BTC_Hud_Cond     = false;
 BTC_HUD_x        = (SafeZoneW+2*SafeZoneX) + 0.045;
 BTC_HUD_y        = (SafeZoneH+2*SafeZoneY) + 0.045;
-_lift = [] execVM "=BTC=_Logistic\=BTC=_Lift\=BTC=_LiftInit.sqf";
+[] execVM "=BTC=_Logistic\=BTC=_Lift\=BTC=_LiftInit.sqf";
 
 
 //Functions
 BTC_get_liftable_array =
 {
-	_chopper = _this select 0;
+    private ["_array","_chopper"];
+    _chopper = _this select 0;
 	_array   = [];
 	switch (typeOf _chopper) do
 	{
@@ -54,7 +56,7 @@ BTC_get_liftable_array =
 
 BTC_paradrop =
 {
-	private ["_chopper", "_cargo", "_chute_type", "_cargoects", "_rel_pos", "_height", "_cargo_type", "_smoke"];
+	private ["_chopper","_cargo","_chute_type","_height","_smoke","_chute"];
 
 	_chopper          = _this select 0;
 	_cargo      = _this select 1;
@@ -66,8 +68,6 @@ BTC_paradrop =
 	diag_log format ["DEBUG BTC LIFT: Paradrop height: %1", _height];
 	
 	if (_height > 50) then {
-		//diag_log ("DEBUG BTC LIFT: PARACUTE");
-		_cargo_type = typeOf _cargo;
 		if (typeOf _chopper == "MH6J_DZ") then {
 			_chute = createVehicle [_chute_type, [((position _chopper) select 0) - 5,((position _chopper) select 1) - 10,((position _chopper) select 2)- 4], [], 0, "NONE"];
 		} else {
@@ -83,11 +83,11 @@ BTC_paradrop =
 		detach _cargo;
 		
 	};
-	//diag_log ("DEBUG BTC LIFT: DROP");	
 };
 
 BTC_getHeight = {
-	_chopper = _this select 0;
+    private ["_height","_chopper","_cargo","_cargo_position","_cargo_position_asl","_objects"];
+    _chopper = _this select 0;
 	_cargo = _this select 1;
 	
 	_cargo_position = getpos(_cargo);
