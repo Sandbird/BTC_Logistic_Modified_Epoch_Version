@@ -30,4 +30,12 @@ if (!_cantsee) then {
 	_name_cargo  = getText (configFile >> "cfgVehicles" >> typeof _cargo >> "displayName");
 	vehicle player vehicleChat format ["%1 dropped", _name_cargo];
 	[_chopper, _cargo, "ParachuteWest"] spawn BTC_paradrop;
+
+	
+	sleep 60;
+	//force save
+	PVDZE_veh_Update = [_vehicle, "all"];
+	publicVariableServer "PVDZE_veh_Update";
+	//force save
+
 };
